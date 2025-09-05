@@ -1,6 +1,9 @@
+/* Importa a fonte Montserrat do Google Fonts */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
 /* Estilos Gerais */
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Montserrat", sans-serif;
     background-color: #f4f4f4;
     color: #333;
     line-height: 1.6;
@@ -17,11 +20,11 @@ body {
 
 /* Cabeçalho e Navegação */
 header {
-    background: #333;
+    background:#22223b ;
     color: #fff;
     padding-top: 20px;
     min-height: 70px;
-    border-bottom: #0779e4 3px solid;
+    border-bottom: #c9ada7 3px solid;
 }
 
 header h1 {
@@ -31,7 +34,7 @@ header h1 {
 }
 
 nav {
-    background: #444;
+    background:#4a4e69;
     padding: 10px 0;
     text-align: center;
 }
@@ -44,7 +47,7 @@ nav a {
 }
 
 nav a:hover {
-    background: #0779e4;
+    background: #9a8c98;
     border-radius: 5px;
 }
 
@@ -59,7 +62,7 @@ main {
 }
 
 main h2 {
-    color: #0779e4;
+    color: #9a8c98;
     border-bottom: 2px solid #f4f4f4;
     padding-bottom: 10px;
 }

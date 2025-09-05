@@ -3,7 +3,7 @@
 <h2>Cadastro de Chapa</h2>
 
 <?php
-// Exibe mensagens de sucesso ou erro, se houver
+
 if (isset($mensagem)) {
     echo "<p class='mensagem " . ($status ?? 'sucesso') . "'>" . htmlspecialchars($mensagem) . "</p>";
 }

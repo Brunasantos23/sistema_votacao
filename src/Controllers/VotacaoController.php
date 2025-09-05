@@ -1,17 +1,13 @@
 <?php
-// Lógica para a votação e relatório
 
-/**
- * Função para exibir a página de votação
- */
 function exibir_votacao() {
     $db = conectar_db();
     
-    // Se o aluno enviou a matrícula
+    
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['matricula_aluno'])) {
         $matricula_aluno = $_POST['matricula_aluno'];
 
-        // 1. Verifica se a matrícula foi preenchida
+        
         if (empty($matricula_aluno)) {
             $mensagem = "Por favor, informe sua matrícula.";
             $status = 'erro';
@@ -20,7 +16,7 @@ function exibir_votacao() {
             return;
         }
 
-        // 2. Verifica se o aluno já votou
+        
         $stmt_check = $db->prepare("SELECT matricula_aluno FROM alunos_votantes WHERE matricula_aluno = ?");
         $stmt_check->bind_param("s", $matricula_aluno);
         $stmt_check->execute();
@@ -31,7 +27,7 @@ function exibir_votacao() {
             $status = 'erro';
             $erro_matricula = true;
         } else {
-            // Se o aluno não votou, busca as chapas para exibir
+            
             $resultado = $db->query("SELECT id, codigo_chapa, nome_chapa, nome_lider, nome_vice FROM chapas ORDER BY codigo_chapa ASC");
             $chapas = $resultado->fetch_all(MYSQLI_ASSOC);
 
@@ -48,16 +44,14 @@ function exibir_votacao() {
     require_once __DIR__ . '/../Views/votacao.php';
 }
 
-/**
- * Função para processar um voto
- */
+
 function registrar_voto() {
     $db = conectar_db();
 
     $matricula_aluno = $_POST['matricula_aluno'] ?? null;
     $chapa_id = $_POST['chapa_id'] ?? null;
 
-    // Validação
+   
     if (!$matricula_aluno || !$chapa_id) {
         $mensagem = "Ocorreu um erro. Matrícula ou chapa não informada.";
         $status = 'erro';
@@ -65,27 +59,27 @@ function registrar_voto() {
         return;
     }
 
-    // Transação para garantir consistência: ou salva nas duas tabelas ou em nenhuma
+    
     $db->begin_transaction();
 
     try {
-        // 1. Insere na tabela de votos
+       
         $stmt_voto = $db->prepare("INSERT INTO votos (chapa_id) VALUES (?)");
         $stmt_voto->bind_param("i", $chapa_id);
         $stmt_voto->execute();
         
-        // 2. Insere na tabela de alunos que já votaram
+        
         $stmt_aluno = $db->prepare("INSERT INTO alunos_votantes (matricula_aluno) VALUES (?)");
         $stmt_aluno->bind_param("s", $matricula_aluno);
         $stmt_aluno->execute();
 
-        // Se tudo deu certo, confirma a transação
+       
         $db->commit();
         $mensagem = "Voto registrado com sucesso! Obrigado por participar.";
         $status = 'sucesso';
 
     } catch (mysqli_sql_exception $exception) {
-        $db->rollback(); // Desfaz a transação em caso de erro
+        $db->rollback(); 
         $mensagem = "Erro ao registrar o voto. É possível que você já tenha votado.";
         $status = 'erro';
     }
@@ -95,9 +89,7 @@ function registrar_voto() {
 }
 
 
-/**
- * Função para gerar e exibir o relatório de votação
- */
+
 function exibir_relatorio() {
     $db = conectar_db();
 
@@ -117,7 +109,7 @@ function exibir_relatorio() {
     $resultado = $db->query($sql);
     $relatorio = $resultado->fetch_all(MYSQLI_ASSOC);
     
-    // Calcula o total de votos
+
     $total_votos = 0;
     foreach ($relatorio as $item) {
         $total_votos += $item['qtd_votos'];

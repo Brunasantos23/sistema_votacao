@@ -2,6 +2,15 @@
 
 <h2>Chapas Cadastradas</h2>
 
+<?php
+
+if (isset($_SESSION['mensagem'])) {
+    echo "<p class='mensagem sucesso'>" . htmlspecialchars($_SESSION['mensagem']) . "</p>";
+    unset($_SESSION['mensagem']); 
+}
+?>
+
+
 <?php if (empty($chapas)): ?>
     <p>Nenhuma chapa cadastrada até o momento.</p>
 <?php else: ?>
@@ -14,6 +23,7 @@
                 <th>Matrícula do Líder</th>
                 <th>Nome do Vice-Líder</th>
                 <th>Matrícula do Vice-Líder</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -25,6 +35,9 @@
                 <td><?= htmlspecialchars($chapa['matricula_lider']) ?></td>
                 <td><?= htmlspecialchars($chapa['nome_vice']) ?></td>
                 <td><?= htmlspecialchars($chapa['matricula_vice']) ?></td>
+                <td>
+                    <a href="index.php?page=editar_chapa&id=<?= $chapa['id'] ?>">Editar</a>
+                </td>
             </tr>
             <?php endforeach; ?>
         </tbody>

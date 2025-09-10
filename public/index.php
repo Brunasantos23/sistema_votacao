@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../src/Controllers/ChapaController.php';
@@ -14,6 +15,9 @@ if ($action) {
         case 'cadastrar_chapa':
             cadastrar_chapa();
             break;
+        case 'atualizar_chapa': 
+            atualizar_chapa();
+            break;
         case 'votar':
             registrar_voto();
             break;
@@ -28,9 +32,13 @@ if ($action) {
         case 'consulta_chapa':
             consultar_chapas();
             break;
+        case 'editar_chapa': 
+            exibir_formulario_edicao();
+            break;
         case 'votacao':
             exibir_votacao();
             break;
+
         case 'relatorio_votacao':
             exibir_relatorio();
             break;

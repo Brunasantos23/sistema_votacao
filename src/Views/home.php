@@ -1,6 +1,6 @@
 <?php include_once __DIR__ . '/templates/header.php'; ?>
 
-<h2>Bem-vindo ao Sistema de Votação!</h2>
+<h2>Bem-vindo ao Sistema de Votação para Eleição dos Representantes de Turma!</h2>
 <p>Utilize o menu acima para navegar entre as funcionalidades do sistema.</p>
 <ul>
     <li><strong>Cadastrar Chapa:</strong> Permite registrar uma nova chapa para a eleição.</li>
@@ -9,4 +9,4 @@
     <li><strong>Relatório da Votação:</strong> Apresenta os resultados finais da eleição.</li>
 </ul>
 
-<?php include_once __DIR__ . '/templates/footer.php'; ?>
+<?php include_once __DIR__ . '/templates/footer.php'; ?>7777777777777777777777777777777777777777777777
